@@ -1,5 +1,6 @@
 package com.turkcell.library_cqrs.persistence.member.repository;
 
+import com.turkcell.library_cqrs.domain.member.model.Email;
 import com.turkcell.library_cqrs.domain.member.model.Member;
 import com.turkcell.library_cqrs.domain.member.model.MemberId;
 import com.turkcell.library_cqrs.domain.member.repository.MemberRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+//İçteki(domaindeki) interface(memberRepo) bağımlı hale gelir ve onu uygular. (bağımsızlık ilkesi)
 @Repository
 public class MemberRepositoryAdapter implements MemberRepository {
     private final SpringDataMemberRepository repository;
@@ -55,7 +57,25 @@ public class MemberRepositoryAdapter implements MemberRepository {
     }
 
     @Override
-    public void delete(MemberId memberId) {
+    public void deleteById(MemberId memberId) {
         repository.deleteById(memberId.value());
     }
+
+    @Override
+    public void delete(Member member) {
+        JpaMemberEntity entity = memberEntityMapper.toEntity(member);
+        repository.delete(entity);
+    }
+
+    @Override
+    public boolean existsByMemberId(MemberId memberId) {
+        return repository.existsByMemberId(memberId.value());
+    }
+
+    @Override
+    public boolean existsByEmail(Email email) {
+        return repository.existsByEmail(email.value());
+    }
+
+
 }
