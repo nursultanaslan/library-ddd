@@ -1,9 +1,11 @@
 package com.turkcell.library_cqrs.persistence.member.entity;
 
+import com.turkcell.library_cqrs.domain.fine.model.Fine;
 import com.turkcell.library_cqrs.domain.member.model.MemberStatus;
 import com.turkcell.library_cqrs.domain.member.model.MembershipLevel;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -33,6 +35,9 @@ public class JpaMemberEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private MemberStatus memberStatus;
+
+    @OneToMany(mappedBy = "member")
+    private List<Fine> fines;
 
     public UUID id() {
         return id;
@@ -104,5 +109,13 @@ public class JpaMemberEntity {
 
     public void setMemberStatus(MemberStatus memberStatus) {
         this.memberStatus = memberStatus;
+    }
+
+    public List<Fine> fines() {
+        return fines;
+    }
+
+    public void setFines(List<Fine> fines) {
+        this.fines = fines;
     }
 }

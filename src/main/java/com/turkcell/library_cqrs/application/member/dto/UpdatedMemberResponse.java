@@ -6,6 +6,6 @@ import java.util.UUID;
 
 //Kullanıcı bilgilerini güncelledikten sonra ona ne dönecegim?
 public record UpdatedMemberResponse(
-        UUID id, String firstName, String lastName, Username username
+        UUID id, String firstName, String lastName, String username
 ) {
 }

@@ -6,4 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
 public interface SpringDataMemberRepository extends JpaRepository<JpaMemberEntity, UUID> {
+
+    boolean existsByMemberId(UUID memberId);
+    boolean existsByEmail(String email);
 }

@@ -28,7 +28,7 @@ public class UpdateMemberMapper {
                 member.id().value(),
                 member.firstName(),
                 member.lastName(),
-                member.username()
+                member.username().value()
         );
     }
 }

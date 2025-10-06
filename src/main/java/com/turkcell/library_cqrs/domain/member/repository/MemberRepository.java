@@ -1,5 +1,6 @@
 package com.turkcell.library_cqrs.domain.member.repository;
 
+import com.turkcell.library_cqrs.domain.member.model.Email;
 import com.turkcell.library_cqrs.domain.member.model.Member;
 import com.turkcell.library_cqrs.domain.member.model.MemberId;
 
@@ -12,5 +13,8 @@ public interface MemberRepository {
     Optional<Member> findById(MemberId memberId);
     List<Member> findAll();
     List<Member> findAllPaged(Integer pageIndex, Integer pageSize);
-    void delete(MemberId memberId);
+    void deleteById(MemberId memberId);
+    void delete(Member member);
+    boolean existsByMemberId(MemberId memberId);
+    boolean existsByEmail(Email email);
 }
