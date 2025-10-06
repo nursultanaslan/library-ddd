@@ -8,7 +8,7 @@ public record LoanPeriod(LocalDate loanDate, LocalDate dueDate, LocalDate return
         Objects.requireNonNull(loanDate, "Loan date cannot be null");
         Objects.requireNonNull(dueDate,"Due date cannot be null");
 
-        // returnDate null olabilir çünkü kitap henüz iade edilmemiştir
+        // returnDate can be null because the book has not been returned yet
 
         if (dueDate.isBefore(loanDate)) {
             throw new IllegalArgumentException("Due date cannot be before loan date");
@@ -17,7 +17,10 @@ public record LoanPeriod(LocalDate loanDate, LocalDate dueDate, LocalDate return
         if (returnDate != null && returnDate.isBefore(loanDate)) {
             throw new IllegalArgumentException("Return date cannot be before loan date");
         }
+    }
 
-        // TODO:iş kuralları
+    //Still not returned and expired?
+    public boolean isOverdue() {
+        return dueDate.isBefore(LocalDate.now()) && returnDate == null;
     }
 }
