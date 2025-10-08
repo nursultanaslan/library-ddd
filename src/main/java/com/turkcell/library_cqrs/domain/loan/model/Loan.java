@@ -54,6 +54,19 @@ public class Loan {
         this.loanStatus = LoanStatus.CLOSED;
     }
 
+    public void updateLoan(LoanPeriod newPeriod, LoanStatus newStatus) {
+        if (this.loanStatus == LoanStatus.CLOSED) {
+            throw new IllegalStateException("Closed loans cannot be modified.");
+        }
+        if (newPeriod != null) {
+            this.loanPeriod = newPeriod;
+        }
+        if (newStatus != null) {
+            this.loanStatus = newStatus;
+        }
+    }
+
+
     public boolean isOverdue() {
         return loanPeriod.isOverdue() && loanStatus == LoanStatus.OPEN;
     }
