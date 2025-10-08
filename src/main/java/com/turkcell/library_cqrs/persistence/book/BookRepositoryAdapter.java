@@ -37,7 +37,7 @@ public class BookRepositoryAdapter implements BookRepository {
         return springDataBookRepository
                 .findAll()
                 .stream()
-                .map(bookEntityMapper::toDomain)// metod referans
+                .map(bookEntityMapper::toDomain)  // method reference
                 .toList();
     }
 
