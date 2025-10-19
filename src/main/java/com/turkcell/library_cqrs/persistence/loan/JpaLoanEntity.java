@@ -3,10 +3,12 @@ package com.turkcell.library_cqrs.persistence.loan;
 import com.turkcell.library_cqrs.domain.bookItems.model.BookItems;
 import com.turkcell.library_cqrs.domain.loan.model.LoanStatus;
 import com.turkcell.library_cqrs.domain.member.model.Member;
+import com.turkcell.library_cqrs.persistence.fine.entity.JpaFineEntity;
 import com.turkcell.library_cqrs.persistence.member.entity.JpaMemberEntity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -34,6 +36,15 @@ public class JpaLoanEntity {
     /*@ManyToOne      TODO: BookItems persistence layer will be created
     @JoinColumn(name = "bookItems_id", nullable = false)
     private JpaBookItemsEntity bookItems;*/
+    @OneToMany(mappedBy = "loan")
+    private List<JpaFineEntity> fines;
+
+    public JpaLoanEntity() {
+    }
+
+    public JpaLoanEntity(UUID id) {
+        this.id = id;
+    }
 
     public UUID getId() {
         return id;
@@ -81,5 +92,13 @@ public class JpaLoanEntity {
 
     public void setMember(JpaMemberEntity member) {
         this.member = member;
+    }
+
+    public List<JpaFineEntity> fines() {
+        return fines;
+    }
+
+    public void setFines(List<JpaFineEntity> fines) {
+        this.fines = fines;
     }
 }

@@ -1,6 +1,7 @@
 package com.turkcell.library_cqrs.persistence.fine.entity;
 
-import com.turkcell.library_cqrs.domain.member.model.Member;
+import com.turkcell.library_cqrs.persistence.loan.JpaLoanEntity;
+import com.turkcell.library_cqrs.persistence.member.entity.JpaMemberEntity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -24,7 +25,11 @@ public class JpaFineEntity {
 
     @ManyToOne()
     @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
+    private JpaMemberEntity member;
+
+    @ManyToOne()
+    @JoinColumn(name = "loan_id", nullable = false)
+    private JpaLoanEntity loan;
 
     public UUID id() {
         return id;
@@ -66,11 +71,19 @@ public class JpaFineEntity {
         isPaid = paid;
     }
 
-    public Member member() {
+    public JpaMemberEntity member() {
         return member;
     }
 
-    public void setMember(Member member) {
+    public void setMember(JpaMemberEntity member) {
         this.member = member;
+    }
+
+    public JpaLoanEntity loan() {
+        return loan;
+    }
+
+    public void setLoan(JpaLoanEntity loan) {
+        this.loan = loan;
     }
 }

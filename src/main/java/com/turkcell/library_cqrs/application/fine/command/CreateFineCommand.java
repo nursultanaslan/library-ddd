@@ -12,10 +12,11 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public record CreateFineCommand(
+        @NotNull UUID memberId,
+        @NotNull UUID loanId,
         @Positive BigDecimal amount,
         @NotBlank @Size(min = 2, max = 50) String currency,
         @NotNull LocalDate fineDate,
-        @NotNull Boolean isPaid,
-        @NotNull UUID memberId
+        @NotNull Boolean isPaid
 ) implements Command<CreateFineResponse> {
 }

@@ -123,7 +123,7 @@ public class Member {
         if (lastName == null || lastName.isBlank()){
             throw new IllegalArgumentException("Lastname cannot be null");
         }
-        if (lastName.length() >= 50){
+        if (lastName.length() > 50){
             throw new IllegalArgumentException("Last name length must be less than 50 characters");
         }
     }
