@@ -4,9 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public record CreateFineResponse(
+public record FineResponse(
         UUID id,
-        UUID memberId,
         BigDecimal amount,
         String currency,
         LocalDate fineDate,

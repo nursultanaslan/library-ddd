@@ -1,8 +1,8 @@
 package com.turkcell.library_cqrs.persistence.member.entity;
 
-import com.turkcell.library_cqrs.domain.fine.model.Fine;
 import com.turkcell.library_cqrs.domain.member.model.MemberStatus;
 import com.turkcell.library_cqrs.domain.member.model.MembershipLevel;
+import com.turkcell.library_cqrs.persistence.fine.entity.JpaFineEntity;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -37,7 +37,14 @@ public class JpaMemberEntity {
     private MemberStatus memberStatus;
 
     @OneToMany(mappedBy = "member")
-    private List<Fine> fines;
+    private List<JpaFineEntity> fines;
+
+    public JpaMemberEntity() {
+    }
+
+    public JpaMemberEntity(UUID id) {
+        this.id = id;
+    }
 
     public UUID id() {
         return id;
@@ -111,11 +118,11 @@ public class JpaMemberEntity {
         this.memberStatus = memberStatus;
     }
 
-    public List<Fine> fines() {
+    public List<JpaFineEntity> fines() {
         return fines;
     }
 
-    public void setFines(List<Fine> fines) {
+    public void setFines(List<JpaFineEntity> fines) {
         this.fines = fines;
     }
 }

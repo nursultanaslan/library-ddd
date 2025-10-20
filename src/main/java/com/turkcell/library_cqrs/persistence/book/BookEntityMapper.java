@@ -3,6 +3,8 @@ package com.turkcell.library_cqrs.persistence.book;
 import com.turkcell.library_cqrs.domain.book.model.Author;
 import com.turkcell.library_cqrs.domain.book.model.Book;
 import com.turkcell.library_cqrs.domain.book.model.BookId;
+import com.turkcell.library_cqrs.domain.category.model.CategoryId;
+import com.turkcell.library_cqrs.persistence.category.entity.JpaCategoryEntity;
 
 public class BookEntityMapper {
 
@@ -16,6 +18,7 @@ public class BookEntityMapper {
         bookEntity.setTotalPage(book.getTotalPage());
         bookEntity.setImageUrl(book.getImageUrl());
         bookEntity.setPublisher(book.getPublisher());
+        bookEntity.setCategory(new JpaCategoryEntity(book.getCategoryId().value()));
         return bookEntity;
     }
 
@@ -27,7 +30,8 @@ public class BookEntityMapper {
                 book.getIsbn(),
                 book.getTotalPage(),
                 book.getPublisher(),
-                book.getImageUrl()
+                book.getImageUrl(),
+                new CategoryId(book.getId())
         );
     }
 }

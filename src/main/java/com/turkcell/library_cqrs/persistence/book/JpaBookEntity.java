@@ -1,9 +1,7 @@
 package com.turkcell.library_cqrs.persistence.book;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.turkcell.library_cqrs.persistence.category.entity.JpaCategoryEntity;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
@@ -32,6 +30,10 @@ public class JpaBookEntity {
 
     @Column(name = "imageUrl", nullable = false)
     private String imageUrl;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private JpaCategoryEntity category;
 
     public UUID getId() {
         return id;
@@ -87,5 +89,13 @@ public class JpaBookEntity {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public JpaCategoryEntity category() {
+        return category;
+    }
+
+    public void setCategory(JpaCategoryEntity category) {
+        this.category = category;
     }
 }

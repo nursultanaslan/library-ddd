@@ -15,19 +15,19 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/members")
 @Validated
-public class MemberController {
+public class MembersController {
 
     private final QueryHandler<GetByIdMemberQuery, GetByIdMemberResponse> getByIdQueryHandler;
     private final CommandHandler<UpdateMemberCommand, UpdatedMemberResponse> updateMemberCommandHandler;
     private final CommandHandler<DeleteMemberCommand, DeletedMemberResponse> deleteCommandHandler;
 
-    public MemberController(QueryHandler<GetByIdMemberQuery, GetByIdMemberResponse> getByIdQueryHandler, CommandHandler<UpdateMemberCommand, UpdatedMemberResponse> updateMemberCommandHandler, CommandHandler<DeleteMemberCommand, DeletedMemberResponse> deleteCommandHandler) {
+    public MembersController(QueryHandler<GetByIdMemberQuery, GetByIdMemberResponse> getByIdQueryHandler, CommandHandler<UpdateMemberCommand, UpdatedMemberResponse> updateMemberCommandHandler, CommandHandler<DeleteMemberCommand, DeletedMemberResponse> deleteCommandHandler) {
         this.getByIdQueryHandler = getByIdQueryHandler;
         this.updateMemberCommandHandler = updateMemberCommandHandler;
         this.deleteCommandHandler = deleteCommandHandler;
     }
 
-    @GetMapping()
+    @GetMapping("/{id}")
     public GetByIdMemberResponse getById(@Valid GetByIdMemberQuery query){
         return getByIdQueryHandler.handle(query);
     }

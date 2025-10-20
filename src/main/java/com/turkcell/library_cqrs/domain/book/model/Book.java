@@ -1,6 +1,8 @@
 package com.turkcell.library_cqrs.domain.book.model;
 
 
+import com.turkcell.library_cqrs.domain.category.model.CategoryId;
+
 import java.util.Objects;
 
 public class Book {
@@ -13,7 +15,9 @@ public class Book {
     private String publisher;
     private String imageUrl;
 
-    private Book(BookId id, String title, Author author, String isbn, Integer totalPage, String publisher,String imageUrl) {
+    private CategoryId categoryId;
+
+    private Book(BookId id, String title, Author author, String isbn, Integer totalPage, String publisher,String imageUrl, CategoryId categoryId) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -21,9 +25,10 @@ public class Book {
         this.totalPage = totalPage;
         this.publisher = publisher;
         this.imageUrl=imageUrl;
+        this.categoryId = categoryId;
     }
 
-    public static Book create(String title,Author author,String isbn, Integer totalPage, String publisher,String imageUrl){
+    public static Book create(String title,Author author,String isbn, Integer totalPage, String publisher,String imageUrl, CategoryId categoryId){
         validateTitle(title);
         Objects.requireNonNull(author,"Author cannot be null");
         validateIsbn(isbn);
@@ -31,11 +36,11 @@ public class Book {
         validatePublisher(publisher);
         validateImageUrl(imageUrl);
 
-        return new Book(BookId.generate(),title,author,isbn,totalPage,publisher,imageUrl);
+        return new Book(BookId.generate(),title,author,isbn,totalPage,publisher,imageUrl, categoryId);
     }
 
-    public static Book rehydrate(BookId id, String title, Author author, String isbn, Integer totalPage, String publisher, String imageUrl) {
-        return new Book(id, title, author, isbn, totalPage, publisher, imageUrl);
+    public static Book rehydrate(BookId id, String title, Author author, String isbn, Integer totalPage, String publisher, String imageUrl, CategoryId categoryId) {
+        return new Book(id, title, author, isbn, totalPage, publisher, imageUrl, categoryId);
     }
 
     // İş yapan davranışlar
@@ -111,5 +116,9 @@ public class Book {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public CategoryId getCategoryId() {
+        return categoryId;
     }
 }
